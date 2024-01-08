@@ -10,7 +10,7 @@ services:
       - go_server
     environment:
       - DJANGO_REPLICAS = ${DJANGO_REPLICAS:-1}
-      - DJANGO_REPLICAS = ${DJANGO_REPLICAS:-1}
+      - GO_REPLICAS = ${GO_REPLICAS:-1}
     command: /bin/bash -c "envsubst < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
   django_server:
