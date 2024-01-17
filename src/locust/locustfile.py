@@ -1,3 +1,9 @@
 from locust import HttpUser, between, task
 
-# TODO PART 5
+HOST_NAME = 'localhost:80'
+
+
+class LoadTest(HttpUser):
+    @task
+    def api(self):
+        self.client.get('/api/')
