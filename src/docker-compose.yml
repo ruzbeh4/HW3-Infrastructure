@@ -8,17 +8,11 @@ services:
     depends_on:
       - django_server
       - go_server
-    environment:
-      - DJANGO_REPLICAS = ${DJANGO_REPLICAS:-1}
-      - GO_REPLICAS = ${GO_REPLICAS:-1}
-    command: /bin/bash -c "chmod +x ./nginx/conf.d/setup.sh && ./nginx/conf.d/setup.sh"
 
   django_server:
     build: ./django
     environment:
       - DJANGO_REPLICAS = ${DJANGO_REPLICAS:-1}
-    ports:
-      - 9000
     deploy:
       mode: replicated
       replicas: ${DJANGO_REPLICAS:-1}
@@ -32,8 +26,6 @@ services:
     build: ./go
     environment:
       - GO_REPLICAS = ${GO_REPLICAS:-1}
-    ports:
-      - 8000
     deploy:
       mode: replicated
       replicas: ${GO_REPLICAS:-1}
